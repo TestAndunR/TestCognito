@@ -1,6 +1,17 @@
 let AWS = require('aws-sdk');
-exports.handler = function(event, context, callback) {
+const cognito_idp = new AWS.CognitoIdentityServiceProvider();
+exports.handler = function (event, context, callback) {
+	cognito_idp.listUsers({
+		UserPoolId: process.env.UserPoolId_cognitoCognitoResource,
+		AttributesToGet: '[address,birthdate,email,gender,name,phone_number]'
+	}, function (error, data) {
+		if (error) {
+			// implement error handling logic here
+			throw error;
+		}
+		// your logic goes within this block
+	});
 
-	
-	callback(null,'Successfully executed');
+
+	callback(null, 'Successfully executed');
 }
